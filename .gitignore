@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+logs/
+models/*.joblib
+outputs/scored_new_batch.csv
+.venv/
+.DS_Store

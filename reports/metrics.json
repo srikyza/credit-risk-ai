@@ -1,0 +1,72 @@
+{
+  "data_quality": {
+    "rows": 30000,
+    "columns": 25,
+    "missing_values": 0,
+    "duplicate_ids": 0,
+    "duplicate_rows": 35,
+    "limit_nonpositive": 0,
+    "age_out_of_range": 0,
+    "pay_status_out_of_range": 0,
+    "education_undocumented_codes_0_5_6": 345,
+    "marriage_undocumented_code_0": 54,
+    "default_rate": 0.2212
+  },
+  "cleaning": {
+    "EDUCATION 0/5/6 -> 4 (other)": 345,
+    "MARRIAGE 0 -> 3 (other)": 54
+  },
+  "metrics": {
+    "model": "Gradient Boosting (tuned)",
+    "threshold": 0.15,
+    "roc_auc": 0.7848146581695927,
+    "gini": 0.5696293163391855,
+    "ks": 0.4381923884759031,
+    "pr_auc": 0.5670945803864621,
+    "brier": 0.13288467172092253,
+    "precision": 0.3520431073192636,
+    "recall": 0.7879396984924623,
+    "tn": 2062,
+    "fp": 1443,
+    "fn": 211,
+    "tp": 784,
+    "expected_cost": 2498.0,
+    "cost_if_no_model": 4975.0,
+    "cost_saving_pct": 49.78894472361809
+  },
+  "tiers": [
+    {
+      "tier": "Low",
+      "clients": 2273,
+      "avg_predicted_pd": 0.08772553875379131,
+      "actual_default_rate": 0.09282886053673559
+    },
+    {
+      "tier": "Medium",
+      "clients": 1373,
+      "avg_predicted_pd": 0.21544333525679946,
+      "actual_default_rate": 0.20320466132556445
+    },
+    {
+      "tier": "High",
+      "clients": 854,
+      "avg_predicted_pd": 0.5710199402906654,
+      "actual_default_rate": 0.5913348946135831
+    }
+  ],
+  "top_features": {
+    "MAX_DELAY": 0.0444,
+    "PAY_1": 0.0235,
+    "BILL_AMT1": 0.0069,
+    "PAY_AMT2": 0.0037,
+    "BILL_TREND": 0.0036,
+    "PAY_AMT3": 0.003,
+    "AGE": 0.0028,
+    "UTIL_MAX": 0.0028,
+    "N_LATE_MONTHS": 0.0025,
+    "PAY_AMT_MEAN": 0.0022
+  },
+  "drift_alerts_normal": 0,
+  "drift_alerts_stress": 3,
+  "generated": "2026-10-08T11:00:57"
+}

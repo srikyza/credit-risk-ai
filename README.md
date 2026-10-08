@@ -23,18 +23,18 @@ Google Colab: upload the folder, then `!pip install -r requirements.txt` and `!p
 | 6 | Deploy / score | `score.py`, `app.py` | saved model artefact, batch scoring CLI, Streamlit dashboard |
 | 7 | Report | `run_pipeline.py` | auto-writes `reports/summary.md`, `metrics.json`, figures, scored CSVs |
 
-## Design decisions to defend in your viva
+
 - **Imbalance (22% defaults):** handled with stratified splits, PR-AUC, and a *cost-based decision threshold* (a missed default costs 5x a wrongly declined client, editable in `config.py`) instead of resampling, which keeps probabilities honest. Result: predicted PD matches observed default rate in every tier.
 - **Responsible AI:** SEX and MARRIAGE are excluded from the model; they are used only afterwards in the fairness audit.
 - **No leakage:** the test set is touched once. Threshold and model choice use validation only.
 - **Monitoring:** PSI < 0.10 stable, 0.10-0.25 watch, > 0.25 retrain.
 
-## Scheduling (this is what makes it truly automated)
+
 - Linux/Mac cron, retrain weekly: `0 2 * * 1 cd /path/credit_risk_ai && python run_pipeline.py`
 - Windows: Task Scheduler running `python run_pipeline.py`. The exit code is 0 on success and 1 on failure.
 - Extension: drop new monthly CSVs in `data/`, run `--score`, and trigger a retrain when `drift_stress_batch.csv` style alerts appear.
 
-## Known limitations (state these openly)
+## Known limitations 
 - Single snapshot from 2005 in Taiwan, with no time ordering, so true out-of-time validation is not possible.
 - PD estimates reflect that population; re-calibrate before using on another market.
 - Cost ratio 5:1 is an assumption, not bank data.
